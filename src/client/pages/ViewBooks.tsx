@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-class Home extends React.Component<HomeProps, HomeState> {
-  constructor(props: HomeProps) {
+class ViewBooks extends React.Component<ViewBooksProps, ViewBooksState> {
+  constructor(props: ViewBooksProps) {
     super(props);
     this.state = {};
   }
@@ -17,12 +17,12 @@ class Home extends React.Component<HomeProps, HomeState> {
     console.log(this.state);
     return (
       <div>
-        <h1>Home Page</h1>
+        <h1>ViewBooks Page</h1>
       </div>
     );
   }
 }
 
-export interface HomeProps {}
-export interface HomeState {}
-export default Home;
+export interface ViewBooksProps {}
+export interface ViewBooksState {}
+export default ViewBooks;
