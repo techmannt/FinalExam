@@ -26,33 +26,40 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', isAdmin, async (req:ReqUser, res) => {
+router.post('/', isAdmin, async (req: ReqUser, res) => {
   let title = req.body.title;
   let price = req.body.price;
   let author = req.body.author;
   let categoryid = req.body.categoryid;
-  try {
-    let result = await db.bookCrud.addOne(title, price, author, categoryid);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json('There is an error!');
+  if (categoryid !== undefined) {
+    try {
+      let result = await db.bookCrud.addOne(title, price, author, categoryid);
+      res.json(result);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json('There is an error!');
+    }
+  } else {
+    res.status(500).json('Category Id can not be null!');
   }
-
 });
 
-router.put('/:id', isAdmin, async (req:ReqUser, res) => {
+router.put('/:id', isAdmin, async (req: ReqUser, res) => {
   let title = req.body.title;
   let price = req.body.price;
   let author = req.body.author;
   let categoryid = req.body.categoryid;
   let id = req.params.id;
-  try {
-    let result = await db.bookCrud.update(title, price, author, categoryid, id);
-    res.json('Edited!');
-  } catch (error) {
-    console.log(error);
-    res.status(500).json('There is an error!');
+  if (categoryid !== undefined) {
+    try {
+      await db.bookCrud.update(title, price, author, categoryid, id);
+      res.json('Edited!');
+    } catch (error) {
+      console.log(error);
+      res.status(500).json('There is an error!');
+    }
+  } else {
+    res.status(500).json('Category Id can not be null!');
   }
 });
 
@@ -70,8 +77,8 @@ router.delete('/:id', isAdmin, async (req, res) => {
 export default router;
 
 interface ReqUser extends Request {
-	user: {
-		id: number;
-		role: string;
-	};
+  user: {
+    id: number;
+    role: string;
+  };
 }
