@@ -21,5 +21,8 @@ import users from './queries/users';
 import tokens from './queries/tokens';
 
 export default {
-
+  bookCrud,
+  categories,
+	users,
+	tokens
 }

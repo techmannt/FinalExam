@@ -27,6 +27,10 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', isAdmin, async (req:ReqUser, res) => {
+  let title = req.body.title;
+  let price = req.body.price;
+  let author = req.body.author;
+  let categoryid = req.body.categoryid;
   try {
     let result = await db.bookCrud.addOne(title, price, author, categoryid);
     res.json(result);
@@ -38,6 +42,11 @@ router.post('/', isAdmin, async (req:ReqUser, res) => {
 });
 
 router.put('/:id', isAdmin, async (req:ReqUser, res) => {
+  let title = req.body.title;
+  let price = req.body.price;
+  let author = req.body.author;
+  let categoryid = req.body.categoryid;
+  let id = req.params.id;
   try {
     let result = await db.bookCrud.update(title, price, author, categoryid, id);
     res.json('Edited!');
