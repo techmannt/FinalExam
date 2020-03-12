@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { RouteComponentProps } from 'react-router';
+import { setToken } from '../services/api';
 
 const Register: React.FC<RegisterProps> = props => {
   const [username, setUsername] = useState<string>('');
@@ -22,15 +23,13 @@ const Register: React.FC<RegisterProps> = props => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(newBody)
-
         });
         let userDataInfo = await userData.json();
-
+        setToken(userDataInfo.token);
         if (userData.ok) {
           localStorage.setItem('userid', userDataInfo.userid);
           localStorage.setItem('email', email);
           localStorage.setItem('name', username);
-
           props.history.push('/books');
         }
       } catch (error) {
