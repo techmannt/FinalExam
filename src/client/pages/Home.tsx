@@ -1,28 +1,39 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
-class Home extends React.Component<HomeProps, HomeState> {
-  constructor(props: HomeProps) {
+class Home extends React.Component<IHomeProps, IHomeState> {
+  constructor(props: IHomeProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      loaded: false
+    };
   }
 
-  async componentDidMount() {
-    try {
-
-    } catch (error) {
-      console.log(error);
-    }
+  componentDidMount() {
+    this.setState({
+      loaded: true
+    });
   }
+
   render() {
-    console.log(this.state);
-    return (
-      <div>
-        <h1>Home Page</h1>
-      </div>
-    );
+    if (this.state.loaded) {
+      return (
+        <div>
+          <h1>Welcome to my Book Store!</h1>
+        </div>
+      );
+    } else {
+      return (
+        <div></div>
+      );
+    }
   }
 }
 
-export interface HomeProps {}
-export interface HomeState {}
+export interface IHomeProps extends RouteComponentProps<{ id: string }> { }
+
+export interface IHomeState {
+  loaded: boolean;
+}
+
 export default Home;
