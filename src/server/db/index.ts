@@ -15,5 +15,11 @@ export const Query = <T=any>(query: string, values?: Array<any>) => {
   });
 }
 
+import bookCrud from './queries/bookCrud';
+import categories from './queries/categories';
+import users from './queries/users';
+import tokens from './queries/tokens';
+
 export default {
+
 }
